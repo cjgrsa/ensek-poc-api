@@ -38,27 +38,53 @@ class Program
             var token = await loginEndpoint.GetAccessToken();
             apiClient.SetAuthorizationHeader(token);
 
-            // Reset the test data
+            // TEST 1 Reset the test data
             await resetEndpoint.ResetTestData();
 
-            // Buy a quantity of each fuel
+            // TEST 2 Buy a quantity of each fuel
             foreach (var fuel in fuelQuantities)
             {
-                await buyEndpoint.BuyFuel(fuel.Key, fuel.Value, resultsCsvPath);
+                await buyEndpoint.BuyFuel(fuel.Key, fuel.Value.buyAmount, resultsCsvPath);
             }
 
-            // Verify that each order from the previous step is returned in the /orders list with the expected details
+            // Reload fuelQuantities with the updated CSV file
+            var updatedFuelQuantities = ReadCsvFile(resultsCsvPath);
+
+            // TEST 3 Verify that each order from the previous step is returned in the /orders list with the expected details
             var orders = await ordersEndpoint.GetOrders();
-            foreach (var fuel in fuelQuantities)
+            foreach (var fuel in updatedFuelQuantities)
             {
-                var order = orders.Find(o => o.Fuel == GetFuelName(fuel.Key) && o.Quantity == fuel.Value);
-                if (order == null)
+                var orderId = fuel.Value.orderId;
+                if (string.IsNullOrEmpty(orderId))
                 {
-                    Console.WriteLine($"Order for {GetFuelName(fuel.Key)} with quantity {fuel.Value} not found.");
+                    UpdateCsvField(resultsCsvPath, fuel.Key, "buy_validation_order", "Skip - No ID");
                 }
                 else
                 {
-                    Console.WriteLine($"Order for {GetFuelName(fuel.Key)} with quantity {fuel.Value} found.");
+                    var order = orders.FirstOrDefault(o => o.Id == orderId);
+                    if (order != null)
+                    {
+                        // Validate the fuel type and quantity
+                        var expectedFuel = GetFuelName(fuel.Key);
+                        var expectedQuantity = fuel.Value.buyAmount;
+
+                        var fuelTypeValidationResult = order.Fuel == expectedFuel ? "pass" : "fail";
+                        var quantityValidationResult = order.Quantity == expectedQuantity ? "pass" : "fail";
+
+                        UpdateCsvField(resultsCsvPath, fuel.Key, "buy_validation_order", "pass");
+                        UpdateCsvField(resultsCsvPath, fuel.Key, "buy_validation_fuel_type", fuelTypeValidationResult);
+                        UpdateCsvField(resultsCsvPath, fuel.Key, "buy_validation_fuel_amount", quantityValidationResult);
+
+                        if (fuelTypeValidationResult == "fail" || quantityValidationResult == "fail")
+                        {
+                            Console.WriteLine($"Order ID {orderId} does not match expected fuel or quantity. Expected: {expectedFuel}, {expectedQuantity}. Actual: {order.Fuel}, {order.Quantity}.");
+                        }
+                    }
+                    else
+                    {
+                        UpdateCsvField(resultsCsvPath, fuel.Key, "buy_validation_order", "fail");
+                        Console.WriteLine($"Order ID {orderId} not found in the returned orders.");
+                    }
                 }
             }
 
@@ -86,29 +112,45 @@ class Program
         }
     }
 
-  static Dictionary<int, int> ReadCsvFile(string filePath)
-{
-    var fuelQuantities = new Dictionary<int, int>();
-
-    var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture);
-    using (var reader = new StreamReader(filePath))
-    using (var csv = new CsvReader(reader, csvConfig))
+    static Dictionary<int, (int buyAmount, string orderId)> ReadCsvFile(string filePath)
     {
-        // Read the header row
-        csv.Read();
-        csv.ReadHeader();
+        var fuelQuantities = new Dictionary<int, (int buyAmount, string orderId)>();
 
-        while (csv.Read())
+        var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture);
+        using (var reader = new StreamReader(filePath))
+        using (var csv = new CsvReader(reader, csvConfig))
         {
-            var fuelType = csv.GetField<int>("fuel_type");
-            var buyAmount = csv.GetField<int>("buy_amount");
-            fuelQuantities[fuelType] = buyAmount;
+            // Read the header row
+            csv.Read();
+            csv.ReadHeader();
+
+            while (csv.Read())
+            {
+                var fuelType = csv.GetField<int>("fuel_type");
+                var buyAmount = csv.GetField<int>("buy_amount");
+                var orderId = csv.GetField<string>("order_id");
+                fuelQuantities[fuelType] = (buyAmount, orderId);
+            }
         }
+
+        return fuelQuantities;
     }
 
-    return fuelQuantities;
-}
-
+    static void UpdateCsvField(string filePath, int fuelType, string fieldName, string newValue)
+    {
+        var lines = File.ReadAllLines(filePath).ToList();
+        for (int i = 1; i < lines.Count; i++) // Skip header line
+        {
+            var fields = lines[i].Split(',');
+            if (int.Parse(fields[0]) == fuelType)
+            {
+                fields[Array.IndexOf(lines[0].Split(','), fieldName)] = newValue;
+                lines[i] = string.Join(',', fields);
+                break;
+            }
+        }
+        File.WriteAllLines(filePath, lines);
+    }
 
     static string GetFuelName(int id)
     {

@@ -1,0 +1,5 @@
+fuel_type,buy_amount,buy_validation_msg,order_id,buy_validation_order
+1,23,fail,d6751026-4774-4962-9d37-60a867e4c6e4,pass
+2,15,skipped,,Skip - No ID
+3,10,pass,97d7a167-850c-42d5-a343-25ce9fc40231,fail
+4,25,pass,2afde855-0419-4d7c-ab21-3875c87906d4,fail

@@ -1,6 +1,8 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CsvHelper;
 using Newtonsoft.Json;
@@ -29,8 +31,11 @@ namespace EnsekApiTests.Endpoints
             // Validate the response dynamically
             var validationResult = ValidateBuyResponse(buyResponse, id, quantity);
 
-            // Write validation result back to the timestamped CSV file
-            WriteValidationResultToCsv(resultsCsvPath, id, validationResult);
+            // Extract the order ID from the response message
+            var orderId = ExtractOrderId(buyResponse.Message);
+
+            // Write validation result and order ID back to the timestamped CSV file
+            WriteValidationResultAndOrderIdToCsv(resultsCsvPath, id, validationResult, orderId);
         }
 
         private string ValidateBuyResponse(BuyResponse response, int id, int quantity)
@@ -49,7 +54,14 @@ namespace EnsekApiTests.Endpoints
             }
         }
 
-        private void WriteValidationResultToCsv(string resultsCsvPath, int id, string validationResult)
+        private string ExtractOrderId(string message)
+        {
+            // Use a regular expression to extract the order ID
+            var match = Regex.Match(message, @"id is (\w{8}-\w{4}-\w{4}-\w{4}-\w{12})\.");
+            return match.Success ? match.Groups[1].Value : string.Empty;
+        }
+
+        private void WriteValidationResultAndOrderIdToCsv(string resultsCsvPath, int id, string validationResult, string orderId)
         {
             var lines = File.ReadAllLines(resultsCsvPath).ToList();
             for (int i = 1; i < lines.Count; i++) // Skip header line
@@ -58,6 +70,7 @@ namespace EnsekApiTests.Endpoints
                 if (int.Parse(fields[0]) == id)
                 {
                     fields[2] = validationResult; // Update buy_validation_msg
+                    fields[3] = orderId; // Update order_id
                     lines[i] = string.Join(',', fields);
                     break;
                 }
