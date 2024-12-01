@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using CsvHelper;
+using CsvHelper.Configuration;
 using EnsekApiTests;
 using EnsekApiTests.Endpoints;
 using Newtonsoft.Json;
@@ -8,6 +13,8 @@ using Newtonsoft.Json;
 class Program
 {
     private static readonly string baseUrl = "https://qacandidatetest.ensek.io";
+    private static readonly string inputCsvPath = @"C:\workspace\EnsekApiTests\execution.csv";
+    private static readonly string resultsFolder = @"C:\workspace\EnsekApiTests\results";
 
     static async Task Main(string[] args)
     {
@@ -19,6 +26,14 @@ class Program
 
         try
         {
+            // Read the input CSV file
+            var fuelQuantities = ReadCsvFile(inputCsvPath);
+
+            // Create a timestamped copy of the CSV file for results
+            var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+            var resultsCsvPath = Path.Combine(resultsFolder, $"execution_{timestamp}.csv");
+            File.Copy(inputCsvPath, resultsCsvPath, overwrite: true);
+
             // Obtain an access token
             var token = await loginEndpoint.GetAccessToken();
             apiClient.SetAuthorizationHeader(token);
@@ -27,17 +42,9 @@ class Program
             await resetEndpoint.ResetTestData();
 
             // Buy a quantity of each fuel
-            var fuelQuantities = new Dictionary<int, int>
-            {
-                { 1, 23 }, // Gas
-                { 2, 15 }, // Nuclear
-                { 3, 10 }, // Electric
-                { 4, 25 }  // Oil
-            };
-
             foreach (var fuel in fuelQuantities)
             {
-                await buyEndpoint.BuyFuel(fuel.Key, fuel.Value);
+                await buyEndpoint.BuyFuel(fuel.Key, fuel.Value, resultsCsvPath);
             }
 
             // Verify that each order from the previous step is returned in the /orders list with the expected details
@@ -78,6 +85,30 @@ class Program
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
+
+  static Dictionary<int, int> ReadCsvFile(string filePath)
+{
+    var fuelQuantities = new Dictionary<int, int>();
+
+    var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture);
+    using (var reader = new StreamReader(filePath))
+    using (var csv = new CsvReader(reader, csvConfig))
+    {
+        // Read the header row
+        csv.Read();
+        csv.ReadHeader();
+
+        while (csv.Read())
+        {
+            var fuelType = csv.GetField<int>("fuel_type");
+            var buyAmount = csv.GetField<int>("buy_amount");
+            fuelQuantities[fuelType] = buyAmount;
+        }
+    }
+
+    return fuelQuantities;
+}
+
 
     static string GetFuelName(int id)
     {
