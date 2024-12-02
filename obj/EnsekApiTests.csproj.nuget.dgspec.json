@@ -44,9 +44,21 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Allure.NUnit": {
+              "target": "Package",
+              "version": "[2.12.1, )"
+            },
             "CsvHelper": {
               "target": "Package",
               "version": "[33.0.1, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.6.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

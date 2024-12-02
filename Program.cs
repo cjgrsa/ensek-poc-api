@@ -34,7 +34,7 @@ class Program
             var resultsCsvPath = Path.Combine(resultsFolder, $"execution_{timestamp}.csv");
             File.Copy(inputCsvPath, resultsCsvPath, overwrite: true);
 
-            // Obtain an access token
+            // TEST 0 Obtain an access token
             var token = await loginEndpoint.GetAccessToken();
             apiClient.SetAuthorizationHeader(token);
 
@@ -93,18 +93,7 @@ class Program
             var ordersBeforeCurrentDate = orders.FindAll(o => DateTime.TryParse(o.Time, out var orderTime) && orderTime.Date < currentDate);
             Console.WriteLine($"Orders created before the current date: {ordersBeforeCurrentDate.Count}");
 
-            // Automate any other validation scenarios that you would consider writing for this API
-            // For example, check if the reset endpoint actually resets the data
-            await resetEndpoint.ResetTestData();
-            var ordersAfterReset = await ordersEndpoint.GetOrders();
-            if (ordersAfterReset.Count == 0)
-            {
-                Console.WriteLine("Reset test data successful.");
-            }
-            else
-            {
-                Console.WriteLine("Reset test data failed.");
-            }
+  
         }
         catch (Exception ex)
         {

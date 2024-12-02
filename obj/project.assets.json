@@ -2,6 +2,61 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "Allure.Net.Commons/2.12.1": {
+        "type": "package",
+        "dependencies": {
+          "AspectInjector": "2.8.1",
+          "MimeTypesMap": "1.0.8",
+          "Newtonsoft.Json": "13.0.3",
+          "System.Collections.Immutable": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Allure.Net.Commons.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Allure.Net.Commons.dll": {
+            "related": ".xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
+      "Allure.NUnit/2.12.1": {
+        "type": "package",
+        "dependencies": {
+          "Allure.Net.Commons": "2.12.1",
+          "NUnit": "3.13.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Allure.NUnit.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Allure.NUnit.dll": {}
+        }
+      },
+      "AspectInjector/2.8.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/AspectInjector.Broker.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/AspectInjector.Broker.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netstandard2.0/AspectInjector.targets": {}
+        }
+      },
       "CsvHelper/33.0.1": {
         "type": "package",
         "compile": {
@@ -13,6 +68,15 @@
           "lib/net8.0/CsvHelper.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "MimeTypesMap/1.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MimeTypesMap.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MimeTypesMap.dll": {}
         }
       },
       "Newtonsoft.Json/13.0.3": {
@@ -27,10 +91,116 @@
             "related": ".xml"
           }
         }
+      },
+      "NUnit/4.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/nunit.framework.dll": {
+            "related": ".legacy.xml;.xml"
+          },
+          "lib/net6.0/nunit.framework.legacy.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/nunit.framework.dll": {
+            "related": ".legacy.xml;.xml"
+          },
+          "lib/net6.0/nunit.framework.legacy.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/NUnit.props": {}
+        }
+      },
+      "NUnit3TestAdapter/4.6.0": {
+        "type": "package",
+        "build": {
+          "build/netcoreapp3.1/NUnit3TestAdapter.props": {}
+        }
+      },
+      "System.Collections.Immutable/5.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {
+            "related": ".xml"
+          }
+        }
       }
     }
   },
   "libraries": {
+    "Allure.Net.Commons/2.12.1": {
+      "sha512": "cix1b/xp/1nUIFUR8MpERt1Rrv9PM2C+VB3pat1g+IEB/h4Ul+7PihCDTE3VfecRob8wz5e8fQ0aHI9atf//gA==",
+      "type": "package",
+      "path": "allure.net.commons/2.12.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Allure-Color.png",
+        "LICENSE",
+        "README.md",
+        "allure.net.commons.2.12.1.nupkg.sha512",
+        "allure.net.commons.nuspec",
+        "content/allureConfig.Template.json",
+        "contentFiles/any/netstandard2.0/allureConfig.Template.json",
+        "lib/netstandard2.0/Allure.Net.Commons.dll",
+        "lib/netstandard2.0/Allure.Net.Commons.xml"
+      ]
+    },
+    "Allure.NUnit/2.12.1": {
+      "sha512": "L4pjgKLNaOwvLxnXS4HAfPWhCuAaAUMy66kFFJNrxUeKPwr+NSmrSN+ff0N83NsKyC1x4oiikoVuN6WCHeHvWQ==",
+      "type": "package",
+      "path": "allure.nunit/2.12.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Allure-N-Color.png",
+        "LICENSE",
+        "README.md",
+        "allure.nunit.2.12.1.nupkg.sha512",
+        "allure.nunit.nuspec",
+        "lib/netstandard2.0/Allure.NUnit.dll"
+      ]
+    },
+    "AspectInjector/2.8.1": {
+      "sha512": "8BScDeaLazJVFaa2Tt9hoWLhllnxXP3Sew+l/vktdZEcgoPOsqhlDqe6GXJvy7xVkdICAbKFsrcDJ0cfrDR6Mg==",
+      "type": "package",
+      "path": "aspectinjector/2.8.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "analyzers/dotnet/cs/AspectInjector.Analyzer.dll",
+        "analyzers/dotnet/cs/AspectInjector.Broker.dll",
+        "analyzers/dotnet/cs/AspectInjector.Rules.dll",
+        "analyzers/dotnet/cs/FluentIL.Common.dll",
+        "aspectinjector.2.8.1.nupkg.sha512",
+        "aspectinjector.nuspec",
+        "build/_bin/linux-arm64/AspectInjector",
+        "build/_bin/linux-musl-arm64/AspectInjector",
+        "build/_bin/linux-musl-x64/AspectInjector",
+        "build/_bin/linux-x64/AspectInjector",
+        "build/_bin/osx-arm64/AspectInjector",
+        "build/_bin/osx-x64/AspectInjector",
+        "build/_bin/win-arm64/AspectInjector.exe",
+        "build/_bin/win-x64/AspectInjector.exe",
+        "build/netstandard2.0/AspectInjector.targets",
+        "buildTransitive/netstandard2.0/AspectInjector.targets",
+        "lib/netstandard2.0/AspectInjector.Broker.dll",
+        "lib/netstandard2.0/AspectInjector.Broker.xml",
+        "package.png",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
     "CsvHelper/33.0.1": {
       "sha512": "fev4lynklAU2A9GVMLtwarkwaanjSYB4wUqO2nOJX5hnzObORzUqVLe+bDYCUyIIRQM4o5Bsq3CcyJR89iMmEQ==",
       "type": "package",
@@ -57,6 +227,20 @@
         "lib/netstandard2.0/CsvHelper.xml",
         "lib/netstandard2.1/CsvHelper.dll",
         "lib/netstandard2.1/CsvHelper.xml"
+      ]
+    },
+    "MimeTypesMap/1.0.8": {
+      "sha512": "iOm6Zar+yVROhlyrGGSJTfThvNoHLUeYeQQND9YD/ot/nA2qsWUp9kP2MHTdF9P7I8afW6eCf8vdELLZjDFdSQ==",
+      "type": "package",
+      "path": "mimetypesmap/1.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/MimeTypesMap.dll",
+        "lib/netstandard1.1/MimeTypesMap.dll",
+        "lib/netstandard2.0/MimeTypesMap.dll",
+        "mimetypesmap.1.0.8.nupkg.sha512",
+        "mimetypesmap.nuspec"
       ]
     },
     "Newtonsoft.Json/13.0.3": {
@@ -88,11 +272,92 @@
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
+    },
+    "NUnit/4.2.2": {
+      "sha512": "mon0OPko28yZ/foVXrhiUvq1LReaGsBdziumyyYGxV/pOE4q92fuYeN+AF+gEU5pCjzykcdBt5l7xobTaiBjsg==",
+      "type": "package",
+      "path": "nunit/4.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "NOTICES.md",
+        "README.md",
+        "THIRD_PARTY_NOTICES.md",
+        "build/NUnit.props",
+        "icon.png",
+        "lib/net462/nunit.framework.dll",
+        "lib/net462/nunit.framework.legacy.dll",
+        "lib/net462/nunit.framework.legacy.xml",
+        "lib/net462/nunit.framework.xml",
+        "lib/net6.0/nunit.framework.dll",
+        "lib/net6.0/nunit.framework.legacy.dll",
+        "lib/net6.0/nunit.framework.legacy.xml",
+        "lib/net6.0/nunit.framework.xml",
+        "nunit.4.2.2.nupkg.sha512",
+        "nunit.nuspec"
+      ]
+    },
+    "NUnit3TestAdapter/4.6.0": {
+      "sha512": "R7e1+a4vuV/YS+ItfL7f//rG+JBvVeVLX4mHzFEZo4W1qEKl8Zz27AqvQSAqo+BtIzUCo4aAJMYa56VXS4hudw==",
+      "type": "package",
+      "path": "nunit3testadapter/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net462/NUnit3.TestAdapter.dll",
+        "build/net462/NUnit3.TestAdapter.pdb",
+        "build/net462/NUnit3TestAdapter.props",
+        "build/net462/nunit.engine.api.dll",
+        "build/net462/nunit.engine.core.dll",
+        "build/net462/nunit.engine.dll",
+        "build/net462/testcentric.engine.metadata.dll",
+        "build/netcoreapp3.1/NUnit3.TestAdapter.dll",
+        "build/netcoreapp3.1/NUnit3.TestAdapter.pdb",
+        "build/netcoreapp3.1/NUnit3TestAdapter.props",
+        "build/netcoreapp3.1/nunit.engine.api.dll",
+        "build/netcoreapp3.1/nunit.engine.core.dll",
+        "build/netcoreapp3.1/nunit.engine.dll",
+        "build/netcoreapp3.1/testcentric.engine.metadata.dll",
+        "docs/README.md",
+        "nunit3testadapter.4.6.0.nupkg.sha512",
+        "nunit3testadapter.nuspec",
+        "nunit_256.png"
+      ]
+    },
+    "System.Collections.Immutable/5.0.0": {
+      "sha512": "FXkLXiK0sVVewcso0imKQoOxjoPAj42R8HtjjbSjVPAzwDfzoyoznWxgA3c38LDbN9SJux1xXoXYAhz98j7r2g==",
+      "type": "package",
+      "path": "system.collections.immutable/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Collections.Immutable.dll",
+        "lib/net461/System.Collections.Immutable.xml",
+        "lib/netstandard1.0/System.Collections.Immutable.dll",
+        "lib/netstandard1.0/System.Collections.Immutable.xml",
+        "lib/netstandard1.3/System.Collections.Immutable.dll",
+        "lib/netstandard1.3/System.Collections.Immutable.xml",
+        "lib/netstandard2.0/System.Collections.Immutable.dll",
+        "lib/netstandard2.0/System.Collections.Immutable.xml",
+        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll",
+        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.xml",
+        "system.collections.immutable.5.0.0.nupkg.sha512",
+        "system.collections.immutable.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Allure.NUnit >= 2.12.1",
       "CsvHelper >= 33.0.1",
+      "NUnit >= 4.2.2",
+      "NUnit3TestAdapter >= 4.6.0",
       "Newtonsoft.Json >= 13.0.3"
     ]
   },
@@ -139,9 +404,21 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "Allure.NUnit": {
+            "target": "Package",
+            "version": "[2.12.1, )"
+          },
           "CsvHelper": {
             "target": "Package",
             "version": "[33.0.1, )"
+          },
+          "NUnit": {
+            "target": "Package",
+            "version": "[4.2.2, )"
+          },
+          "NUnit3TestAdapter": {
+            "target": "Package",
+            "version": "[4.6.0, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

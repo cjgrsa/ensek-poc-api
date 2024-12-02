@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Allure.NUnit" Version="2.12.1" />
     <PackageReference Include="CsvHelper" Version="33.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NUnit" Version="4.2.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
   </ItemGroup>
 
 </Project>

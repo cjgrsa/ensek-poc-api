@@ -1,11 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "WXUqK86Fd9c=",
+  "dgSpecHash": "JdH4i13ccS8=",
   "success": true,
   "projectFilePath": "C:\\workspace\\EnsekApiTests\\EnsekApiTests.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Craig\\.nuget\\packages\\allure.net.commons\\2.12.1\\allure.net.commons.2.12.1.nupkg.sha512",
+    "C:\\Users\\Craig\\.nuget\\packages\\allure.nunit\\2.12.1\\allure.nunit.2.12.1.nupkg.sha512",
+    "C:\\Users\\Craig\\.nuget\\packages\\aspectinjector\\2.8.1\\aspectinjector.2.8.1.nupkg.sha512",
     "C:\\Users\\Craig\\.nuget\\packages\\csvhelper\\33.0.1\\csvhelper.33.0.1.nupkg.sha512",
-    "C:\\Users\\Craig\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\Craig\\.nuget\\packages\\mimetypesmap\\1.0.8\\mimetypesmap.1.0.8.nupkg.sha512",
+    "C:\\Users\\Craig\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Craig\\.nuget\\packages\\nunit\\4.2.2\\nunit.4.2.2.nupkg.sha512",
+    "C:\\Users\\Craig\\.nuget\\packages\\nunit3testadapter\\4.6.0\\nunit3testadapter.4.6.0.nupkg.sha512",
+    "C:\\Users\\Craig\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }
