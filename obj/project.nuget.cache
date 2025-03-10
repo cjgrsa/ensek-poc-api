@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JdH4i13ccS8=",
+  "dgSpecHash": "c7gMkF1KukY=",
   "success": true,
-  "projectFilePath": "C:\\workspace\\EnsekApiTests\\EnsekApiTests.csproj",
+  "projectFilePath": "C:\\workspace\\ensek-poc-api\\EnsekApiTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Craig\\.nuget\\packages\\allure.net.commons\\2.12.1\\allure.net.commons.2.12.1.nupkg.sha512",
     "C:\\Users\\Craig\\.nuget\\packages\\allure.nunit\\2.12.1\\allure.nunit.2.12.1.nupkg.sha512",

@@ -13,8 +13,8 @@ using Newtonsoft.Json;
 class Program
 {
     private static readonly string baseUrl = "https://qacandidatetest.ensek.io";
-    private static readonly string inputCsvPath = @"C:\workspace\EnsekApiTests\execution.csv";
-    private static readonly string resultsFolder = @"C:\workspace\EnsekApiTests\results";
+    private static readonly string inputCsvPath = @"C:\workspace\ensek-poc-api\execution.csv";
+    private static readonly string resultsFolder = @"C:\workspace\ensek-poc-api\results";
 
     static async Task Main(string[] args)
     {

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\workspace\\EnsekApiTests\\EnsekApiTests.csproj": {}
+    "C:\\workspace\\ensek-poc-api\\EnsekApiTests.csproj": {}
   },
   "projects": {
-    "C:\\workspace\\EnsekApiTests\\EnsekApiTests.csproj": {
+    "C:\\workspace\\ensek-poc-api\\EnsekApiTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\workspace\\EnsekApiTests\\EnsekApiTests.csproj",
+        "projectUniqueName": "C:\\workspace\\ensek-poc-api\\EnsekApiTests.csproj",
         "projectName": "EnsekApiTests",
-        "projectPath": "C:\\workspace\\EnsekApiTests\\EnsekApiTests.csproj",
+        "projectPath": "C:\\workspace\\ensek-poc-api\\EnsekApiTests.csproj",
         "packagesPath": "C:\\Users\\Craig\\.nuget\\packages\\",
-        "outputPath": "C:\\workspace\\EnsekApiTests\\obj\\",
+        "outputPath": "C:\\workspace\\ensek-poc-api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Craig\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -36,7 +36,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -81,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
